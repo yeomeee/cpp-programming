@@ -1,0 +1,18 @@
+﻿# Build directories
+cmake-build-debug-visual-studio/
+cmake-build-release-visual-studio/
+
+# IDE settings
+.idea/
+
+# Visual Studio user-specific files
+*.vcxproj.user
+
+# CMake temporary files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Testing/
+Makefile
+build/
+

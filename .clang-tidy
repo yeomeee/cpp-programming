@@ -1,0 +1,6 @@
+Checks: '-*,google-*,
+         readability-*,
+         modernize-*'
+WarningsAsErrors: '*'
+HeaderFilterRegex: '.*'
+AnalyzeTemporaryDtors: true

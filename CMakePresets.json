@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "configurePresets": [
+    {
+      "name": "windows",
+      "generator": "Visual Studio 17 2022",
+      "binaryDir": "${sourceDir}/cmake-build-release-visual-studio",
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "c:/vcpkg/scripts/buildsystems/vcpkg.cmake",
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    }
+  ]
+}
