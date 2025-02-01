@@ -9,24 +9,24 @@
 void UserInterface::navigate(const int menu) {
   switch (menu) {
     case 0:
-      showMenu();
+      selectMenu();
     case 1:
-      createAccount();
+      createMenu();
     case 2:
-      depositToAccount();
+      depositMenu();
     case 3:
-      withdrawFromAccount();
+      withdrawMenu();
     case 4:
-      showAllAccounts();
+      showAllAccountsMenu();
     case 5:
-      clearConsole();
+      clearMenu();
     case 6:
     default:
-      exitProgram();
+      exitMenu();
   }
 }
 
-void UserInterface::showMenu() {
+void UserInterface::selectMenu() {
   cout << endl;
 
   int menu;
@@ -46,7 +46,7 @@ void UserInterface::showMenu() {
   navigate(menu);
 }
 
-void UserInterface::createAccount() {
+void UserInterface::createMenu() {
   int ID;
   string name;
 
@@ -56,14 +56,14 @@ void UserInterface::createAccount() {
   cout << "이 름: ";
   cin >> name;
 
-  AccountsManager::getInstance().createAccount(ID, name);
+  const bool res = AccountsManager::getInstance().create(ID, name);
 
-  cout << "--계좌개설 완료--" << endl;
+  cout << (res ? "--계좌개설 완료--" : "--계좌개설 실패--") << endl;
 
   navigate(0);
 }
 
-void UserInterface::depositToAccount() {
+void UserInterface::depositMenu() {
   int ID;
   double moneyToDeposit;
 
@@ -73,14 +73,15 @@ void UserInterface::depositToAccount() {
   cout << "입금액: ";
   cin >> moneyToDeposit;
 
-  AccountsManager::getInstance().depositToAccount(ID, moneyToDeposit);
+  const bool res = AccountsManager::getInstance().
+      deposit(ID, moneyToDeposit);
 
-  cout << "--입금 완료--" << endl;
+  cout << (res ? "--입금 완료--" : "--입금 실패--") << endl;
 
   navigate(0);
 }
 
-void UserInterface::withdrawFromAccount() {
+void UserInterface::withdrawMenu() {
   int ID;
   double moneyToWithdraw;
 
@@ -90,14 +91,14 @@ void UserInterface::withdrawFromAccount() {
   cout << "출금액: ";
   cin >> moneyToWithdraw;
 
-  AccountsManager::getInstance().withdrawFromAccount(ID, moneyToWithdraw);
+  const bool res = AccountsManager::getInstance().withdraw(ID, moneyToWithdraw);
 
-  cout << "--출금 완료--" << endl;
+  cout << (res ? "--출금 완료--" : "--출금 실패--") << endl;
 
   navigate(0);
 }
 
-void UserInterface::showAllAccounts() {
+void UserInterface::showAllAccountsMenu() {
   const auto& mgr = AccountsManager::getInstance();
 
   cout << "[계좌정보 전체 출력]" << endl << endl;
@@ -115,7 +116,7 @@ void UserInterface::showAllAccounts() {
   navigate(0);
 }
 
-void UserInterface::clearConsole() {
+void UserInterface::clearMenu() {
   try {
     boost::process::system("cmd /c cls");
   } catch (const std::exception& e) {
@@ -125,7 +126,7 @@ void UserInterface::clearConsole() {
   navigate(0);
 }
 
-void UserInterface::exitProgram() {
+void UserInterface::exitMenu() {
   cout << "[프로그램 종료]" << endl;
   exit(0);
 }

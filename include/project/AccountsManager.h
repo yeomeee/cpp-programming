@@ -13,25 +13,23 @@ private:
   AccountsManager() {
   }
 
+  AccountsManager(const AccountsManager &) = delete;
+
+  AccountsManager &operator=(const AccountsManager &) = delete;
+
+  optional<reference_wrapper<Account> > getAccount(int ID);
+
 public:
   static AccountsManager &getInstance() {
     static AccountsManager instance;
     return instance;
   }
 
-  /** 복사 생성자 삭제 */
-  AccountsManager(const AccountsManager &) = delete;
-
-  /** 대입 연산자 삭제 */
-  AccountsManager &operator=(const AccountsManager &) = delete;
-
   const vector<Account> *getAccounts() const;
 
-  Account *getAccount(int ID);
+  bool create(int ID, string &name);
 
-  void createAccount(int ID, string &name);
+  bool deposit(int ID, double money);
 
-  void depositToAccount(int ID, double money);
-
-  void withdrawFromAccount(int ID, double money);
+  bool withdraw(int ID, double money);
 };

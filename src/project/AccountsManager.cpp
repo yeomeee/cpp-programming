@@ -10,26 +10,41 @@ const vector<Account>* AccountsManager::getAccounts() const {
   return &accounts;
 }
 
-Account* AccountsManager::getAccount(const int ID) {
-  if (const auto it = ranges::find(accounts, ID, &Account::getID);
-    it != accounts.end())
-    return (&*it);
+optional<reference_wrapper<Account> >
+AccountsManager::getAccount(const int ID) {
+  for (auto& account : accounts)
+    if (account.getID() == ID)
+      return ref(account);
 
-  throw std::runtime_error("Account with ID not found.");
+  cout << "유효하지 않은 ID 입니다" << endl;
+  return nullopt;
 }
 
-void AccountsManager::createAccount(int ID, string& name) {
-  const auto account = make_unique<Account>(ID, name);
-  accounts.push_back(*account);
+bool AccountsManager::create(int ID, string& name) {
+  accounts.push_back(*make_unique<Account>(ID, name));
+  return true;
 }
 
+bool AccountsManager::deposit(const int ID, const double money) {
+  auto accountOpt = getAccount(ID);
+  if (!accountOpt.has_value()) return false;
 
-void AccountsManager::depositToAccount(const int ID, const double money) {
-  Account* account = getAccount(ID);
-  account->setMoney(account->getMoney() + money);
+  auto& account = accountOpt.value().get();
+  account.setMoney(account.getMoney() + money);
+  return true;
 }
 
-void AccountsManager::withdrawFromAccount(const int ID, const double money) {
-  Account* account = getAccount(ID);
-  account->setMoney(account->getMoney() - money);
+bool AccountsManager::withdraw(const int ID, const double money) {
+  auto accountOpt = getAccount(ID);
+  if (!accountOpt.has_value()) return false;
+
+  auto& account = accountOpt.value().get();
+
+  if (account.getMoney() < money) {
+    cout << "잔액이 부족합니다" << endl;
+    return false;
+  }
+
+  account.setMoney(account.getMoney() - money);
+  return true;
 }

@@ -9,29 +9,29 @@ private:
   UserInterface() {
   };
 
+  UserInterface(const UserInterface &) = delete;
+
+  UserInterface &operator=(const UserInterface &) = delete;
+
+  void selectMenu();
+
+  void createMenu();
+
+  void depositMenu();
+
+  void withdrawMenu();
+
+  void showAllAccountsMenu();
+
+  void clearMenu();
+
+  void exitMenu();
+
 public:
   static UserInterface &getInstance() {
     static UserInterface instance;
     return instance;
   }
 
-  UserInterface(const UserInterface &) = delete;
-
-  UserInterface &operator=(const UserInterface &) = delete;
-
   void navigate(const int menu);
-
-  void showMenu();
-
-  void createAccount();
-
-  void depositToAccount();
-
-  void withdrawFromAccount();
-
-  void showAllAccounts();
-
-  void clearConsole();
-
-  void exitProgram();
 };
