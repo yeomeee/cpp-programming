@@ -1,4 +1,6 @@
 cmake_minimum_required(VERSION 3.12)
+cmake_policy(SET CMP0167 OLD)
+
 project(cpp_programming)
 
 add_definitions(-D_WIN32_WINNT=0x0A00)
