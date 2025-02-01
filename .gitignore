@@ -4,6 +4,7 @@ cmake-build-release-visual-studio/
 
 # IDE settings
 .idea/
+*.DotSettings
 
 # Visual Studio user-specific files
 *.vcxproj.user
