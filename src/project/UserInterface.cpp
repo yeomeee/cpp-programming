@@ -2,72 +2,9 @@
 // Created by sooky on 25. 2. 1.
 //
 
-#include "oop1.h"
-
-#include <boost/process/v1/async_pipe.hpp>
-#include <boost/process/v1/system.hpp>
-
-
-/**
- * Account
- */
-
-Account::Account(const int ID, const string& name): money(0) {
-  this->ID = ID;
-  this->name = name;
-};
-
-int Account::getID() const {
-  return ID;
-}
-
-const string* Account::getName() const {
-  return &name;
-}
-
-double Account::getMoney() const {
-  return money;
-}
-
-void Account::setMoney(const double money) {
-  this->money = money;
-}
-
-/**
- * AccountsManager
- */
-
-const vector<Account>* AccountsManager::getAccounts() const {
-  return &accounts;
-}
-
-Account* AccountsManager::getAccount(const int ID) {
-  if (const auto it = ranges::find(accounts, ID, &Account::getID);
-    it != accounts.end())
-    return (&*it);
-
-  throw std::runtime_error("Account with ID not found.");
-}
-
-void AccountsManager::createAccount(int ID, string& name) {
-  const auto account = make_unique<Account>(ID, name);
-  accounts.push_back(*account);
-}
-
-
-void AccountsManager::depositToAccount(const int ID, const double money) {
-  Account* account = getAccount(ID);
-  account->setMoney(account->getMoney() + money);
-}
-
-void AccountsManager::withdrawFromAccount(const int ID, const double money) {
-  Account* account = getAccount(ID);
-  account->setMoney(account->getMoney() - money);
-}
-
-/**
- * UserInterface
- */
+#include "stdafx.h"
+#include "UserInterface.h"
+#include "AccountsManager.h"
 
 void UserInterface::navigate(const int menu) {
   switch (menu) {
@@ -90,7 +27,7 @@ void UserInterface::navigate(const int menu) {
 }
 
 void UserInterface::showMenu() {
-  cout << endl << endl;
+  cout << endl;
 
   int menu;
 
@@ -103,6 +40,8 @@ void UserInterface::showMenu() {
   cout << "6. 프로그램 종료" << endl;
   cout << "선택: ";
   cin >> menu;
+
+  cout << endl;
 
   navigate(menu);
 }
@@ -161,6 +100,8 @@ void UserInterface::withdrawFromAccount() {
 void UserInterface::showAllAccounts() {
   const auto& mgr = AccountsManager::getInstance();
 
+  cout << "[계좌정보 전체 출력]" << endl << endl;
+
   for (const auto accounts = mgr.getAccounts(); const auto& account : *
        accounts) {
     cout << "계좌ID: " << account.getID() << endl;
@@ -169,7 +110,7 @@ void UserInterface::showAllAccounts() {
     cout << endl;
   }
 
-  cout << "--전체 조회 완료--" << endl;
+  cout << "--계좌정보 전체 출력 완료--" << endl;
 
   navigate(0);
 }
@@ -185,16 +126,6 @@ void UserInterface::clearConsole() {
 }
 
 void UserInterface::exitProgram() {
-  cout << "프로그램을 종료합니다." << endl;
+  cout << "[프로그램 종료]" << endl;
   exit(0);
-}
-
-/**
- * EntryPoint
- */
-
-int oop() {
-  auto& ui = UserInterface::getInstance();
-  ui.navigate(0);
-  return 0;
 }

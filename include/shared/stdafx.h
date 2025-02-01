@@ -6,3 +6,7 @@
 
 #include <iostream>
 #include <boost/process.hpp>
+#include <string>
+#include <vector>
+
+using namespace std;
