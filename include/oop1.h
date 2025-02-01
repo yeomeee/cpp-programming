@@ -86,109 +86,20 @@ public:
 
   UserInterface &operator=(const UserInterface &) = delete;
 
-  void navigate(const int menu) {
-    cout << endl;
-    cout << endl;
+  void navigate(const int menu);
 
-    switch (menu) {
-      case 0:
-        showMenu();
-      case 1:
-        createAccount();
-      case 2:
-        depositToAccount();
-      case 3:
-        withdrawFromAccount();
-      case 4:
-        showAllAccounts();
-      case 5:
-      default:
-        exit();
-    }
-  }
+  void showMenu();
 
-  void showMenu() {
-    int menu;
+  void createAccount();
 
-    cout << "-----Menu-----" << endl;
-    cout << "1. 계좌개설" << endl;
-    cout << "2. 입 금" << endl;
-    cout << "3. 출 금" << endl;
-    cout << "4. 계좌정보 전체 출력" << endl;
-    cout << "5. 프로그램 종료" << endl;
-    cout << "선택: ";
-    cin >> menu;
+  void depositToAccount();
 
-    navigate(menu);
-  }
+  void withdrawFromAccount();
 
-  void createAccount() {
-    int ID;
-    string name;
+  void showAllAccounts();
 
-    cout << "[계좌개설]" << endl;
-    cout << "계좌ID: ";
-    cin >> ID;
-    cout << "이 름: ";
-    cin >> name;
 
-    AccountsManager::getInstance().createAccount(ID, name);
-
-    cout << "계좌개설 완료" << endl;
-
-    navigate(0);
-  }
-
-  void depositToAccount() {
-    int ID;
-    double moneyToDeposit;
-
-    cout << "[입 금]" << endl;
-    cout << "계좌ID: ";
-    cin >> ID;
-    cout << "입금액: ";
-    cin >> moneyToDeposit;
-
-    AccountsManager::getInstance().depositToAccount(ID, moneyToDeposit);
-
-    cout << "입금 완료" << endl;
-
-    navigate(0);
-  }
-
-  void withdrawFromAccount() {
-    int ID;
-    double moneyToWithdraw;
-
-    cout << "[출 금]" << endl;
-    cout << "계좌ID: ";
-    cin >> ID;
-    cout << "출금액: ";
-    cin >> moneyToWithdraw;
-
-    AccountsManager::getInstance().withdrawFromAccount(ID, moneyToWithdraw);
-
-    cout << "출금 완료" << endl;
-
-    navigate(0);
-  }
-
-  void showAllAccounts() {
-    const auto &mgr = AccountsManager::getInstance();
-
-    for (const auto accounts = mgr.getAccounts(); const auto &account: *accounts) {
-      cout << "계좌ID: " << account.getID() << endl;
-      cout << "이 름: " << *account.getName() << endl;
-      cout << "잔 액: " << account.getMoney() << endl;
-      cout << endl;
-    }
-
-    navigate(0);
-  }
-
-  void exit() {
-    cout << "프로그램을 종료합니다." << endl;
-  }
+  void exitProgram();
 };
 
 int oop();
