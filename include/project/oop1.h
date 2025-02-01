@@ -98,6 +98,7 @@ public:
 
   void showAllAccounts();
 
+  void clearConsole();
 
   void exitProgram();
 };

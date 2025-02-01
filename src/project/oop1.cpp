@@ -4,6 +4,9 @@
 
 #include "oop1.h"
 
+#include <boost/process/v1/async_pipe.hpp>
+#include <boost/process/v1/system.hpp>
+
 
 /**
  * Account
@@ -79,12 +82,16 @@ void UserInterface::navigate(const int menu) {
     case 4:
       showAllAccounts();
     case 5:
+      clearConsole();
+    case 6:
     default:
       exitProgram();
   }
 }
 
 void UserInterface::showMenu() {
+  cout << endl << endl;
+
   int menu;
 
   cout << "-----Menu-----" << endl;
@@ -92,7 +99,8 @@ void UserInterface::showMenu() {
   cout << "2. 입 금" << endl;
   cout << "3. 출 금" << endl;
   cout << "4. 계좌정보 전체 출력" << endl;
-  cout << "5. 프로그램 종료" << endl;
+  cout << "5. 콘솔 지우기" << endl;
+  cout << "6. 프로그램 종료" << endl;
   cout << "선택: ";
   cin >> menu;
 
@@ -111,7 +119,7 @@ void UserInterface::createAccount() {
 
   AccountsManager::getInstance().createAccount(ID, name);
 
-  cout << "계좌개설 완료" << endl;
+  cout << "--계좌개설 완료--" << endl;
 
   navigate(0);
 }
@@ -128,7 +136,7 @@ void UserInterface::depositToAccount() {
 
   AccountsManager::getInstance().depositToAccount(ID, moneyToDeposit);
 
-  cout << "입금 완료" << endl;
+  cout << "--입금 완료--" << endl;
 
   navigate(0);
 }
@@ -145,7 +153,7 @@ void UserInterface::withdrawFromAccount() {
 
   AccountsManager::getInstance().withdrawFromAccount(ID, moneyToWithdraw);
 
-  cout << "출금 완료" << endl;
+  cout << "--출금 완료--" << endl;
 
   navigate(0);
 }
@@ -159,6 +167,18 @@ void UserInterface::showAllAccounts() {
     cout << "이 름: " << *account.getName() << endl;
     cout << "잔 액: " << account.getMoney() << endl;
     cout << endl;
+  }
+
+  cout << "--전체 조회 완료--" << endl;
+
+  navigate(0);
+}
+
+void UserInterface::clearConsole() {
+  try {
+    boost::process::system("cmd /c cls");
+  } catch (const std::exception& e) {
+    std::cerr << "Exception: " << e.what() << std::endl;
   }
 
   navigate(0);

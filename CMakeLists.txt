@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.12)
 project(cpp_programming)
 
+add_definitions(-D_WIN32_WINNT=0x0A00)
+
 set(CMAKE_CXX_STANDARD 20)
 set(SHARED_H "${CMAKE_SOURCE_DIR}/include/shared")
 
