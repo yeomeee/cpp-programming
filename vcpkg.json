@@ -1,0 +1,9 @@
+﻿{
+  "name": "cpp-programming",
+  "version": "1.0.0",
+  "dependencies": [
+    {
+      "name": "boost-process"
+    }
+  ]
+}

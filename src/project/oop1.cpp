@@ -67,9 +67,6 @@ void AccountsManager::withdrawFromAccount(const int ID, const double money) {
  */
 
 void UserInterface::navigate(const int menu) {
-  cout << endl;
-  cout << endl;
-
   switch (menu) {
     case 0:
       showMenu();
