@@ -5,27 +5,27 @@
 #include "stdafx.h"
 #include "p166.h"
 
-void Point166::showPointInfo() const {
-  cout << "[" << xpos << ", " << ypos << "]" << endl;
+void Point166::ShowPointInfo() const {
+  cout << "[" << xpos_ << ", " << ypos_ << "]" << endl;
 }
 
-void Circle::showCircleInfo() const {
-  cout << "radius: " << radius << endl;
-  center.showPointInfo();
+void Circle::ShowCircleInfo() const {
+  cout << "radius: " << radius_ << endl;
+  center_.ShowPointInfo();
 }
 
 
-void Ring::showRingInfo() const {
+void Ring::ShowRingInfo() const {
   cout << "Inner Circle Info..." << endl;
-  inner.showCircleInfo();
+  inner_.ShowCircleInfo();
 
   cout << "Outer Circle Info..." << endl;
-  outer.showCircleInfo();
+  outer_.ShowCircleInfo();
 }
 
 
-int p166() {
+int P166() {
   Ring ring = {1, 1, 4, 2, 2, 9};
-  ring.showRingInfo();
+  ring.ShowRingInfo();
   return 0;
 }

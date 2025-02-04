@@ -6,36 +6,36 @@
 
 class Point166 {
 private:
-  int xpos, ypos;
+  int xpos_, ypos_;
 
 public:
-  Point166(int x, int y): xpos(x), ypos(y) {
+  Point166(int x, int y): xpos_(x), ypos_(y) {
   }
 
-  void showPointInfo() const;
+  void ShowPointInfo() const;
 };
 
 class Circle {
 private:
-  Point166 center;
-  int radius;
+  Point166 center_;
+  int radius_;
 
 public:
-  Circle(int x, int y, int r): center(x, y), radius(r) {
+  Circle(int x, int y, int r): center_(x, y), radius_(r) {
   } ;
 
-  void showCircleInfo() const;
+  void ShowCircleInfo() const;
 };
 
 class Ring {
 private:
-  Circle inner, outer;
+  Circle inner_, outer_;
 
 public:
-  Ring(int x1, int y1, int r1, int x2, int y2, int r2): inner(x1, y1, r1), outer(x2, y2, r2) {
+  Ring(int x1, int y1, int r1, int x2, int y2, int r2): inner_(x1, y1, r1), outer_(x2, y2, r2) {
   }
 
-  void showRingInfo() const;
+  void ShowRingInfo() const;
 };
 
-int p166();
+int P166();
