@@ -2,9 +2,18 @@
   "version": 3,
   "configurePresets": [
     {
-      "name": "windows",
+      "name": "release",
       "generator": "Visual Studio 17 2022",
       "binaryDir": "${sourceDir}/cmake-build-release-visual-studio",
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "c:/vcpkg/scripts/buildsystems/vcpkg.cmake",
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "debug",
+      "generator": "Visual Studio 17 2022",
+      "binaryDir": "${sourceDir}/cmake-build-debug-visual-studio",
       "cacheVariables": {
         "CMAKE_TOOLCHAIN_FILE": "c:/vcpkg/scripts/buildsystems/vcpkg.cmake",
         "CMAKE_BUILD_TYPE": "Release"
